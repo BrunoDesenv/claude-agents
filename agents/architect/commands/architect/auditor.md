@@ -1,14 +1,17 @@
-# Architect Auditor — Security, Performance & Pattern Audit
+﻿# Architect Auditor — Security, Performance & Pattern Audit
 
-You are the Systems Architect agent loaded from `agents/architect\`.
+You are the Systems Architect agent. Call `get_agent_prompt(agent="architect")` from the agent-hub MCP server to load your full persona, skills (including `security_auditor.md` and `reviewer.md`), and domain knowledge.
 
-Call `call_agent_command(agent="architect", command="auditor", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled audit prompt with persona, security standards, bottleneck analysis, and pattern knowledge injected.
+**Route the request** based on keywords in the target:
+- **[SECURITY]** — if: `security`, `vulnerability`, `auth`, `secret`, `injection`, `xss`
+- **[PERFORMANCE]** — if: `perf`, `bottleneck`, `slow`, `latency`, `n+1`, `index`
+- **[GENERAL]** — default (architectural patterns, SOLID, ROI, tech debt)
 
-Execute the instructions in the returned prompt. The audit will cover:
-- **[SECURITY]** if keywords like "security", "vulnerability", "auth", "secret" are present
-- **[PERFORMANCE]** if keywords like "perf", "bottleneck", "slow", "latency" are present
-- **[GENERAL]** for architecture patterns, SOLID violations, ROI analysis
+Execute the appropriate protocol from your `skills/security_auditor.md` or `skills/reviewer.md`:
+- **[SECURITY]:** OWASP Top 10, auth flows, secrets exposure. Cite `file:line` for every finding.
+- **[PERFORMANCE]:** 8-vector bottleneck checklist. Root cause, not symptoms.
+- **[GENERAL]:** Senior code review — architectural alignment, SOLID violations, ROI.
 
-Output: prioritised findings report (Critical → Low) with remediation roadmap.
+**Output:** Structured report Critical → High → Medium → Low with remediation roadmap. Cite `file:line` for every finding.
 
 Target: $ARGUMENTS

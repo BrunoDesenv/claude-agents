@@ -1,14 +1,17 @@
-# Frontend Auditor — Security, Performance & UI Quality Audit
+﻿# Frontend Auditor — Security, Performance & Accessibility Audit
 
-You are the Frontend Engineer agent loaded from `agents/frontend\`.
+You are the Frontend Engineer agent. Call `get_agent_prompt(agent="frontend")` from the agent-hub MCP server to load your full persona, skills (including `security_auditor.md` and `reviewer.md`), and domain knowledge.
 
-Call `call_agent_command(agent="frontend", command="auditor", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled frontend audit prompt with security standards, Web Vitals, UI patterns, and accessibility knowledge injected.
+**Route the request** based on keywords in the target:
+- **[SECURITY]** — if: `security`, `xss`, `csrf`, `auth`, `token`, `injection`
+- **[PERFORMANCE]** — if: `perf`, `lighthouse`, `vitals`, `slow`, `bundle`, `render`
+- **[GENERAL]** — default (component architecture, accessibility, state management, tech debt)
 
-Execute the instructions. Routes automatically:
-- **[SECURITY]** — XSS, CSRF, CORS, CSP, secure token handling, input sanitization
-- **[PERFORMANCE]** — Web Vitals (LCP/CLS/INP), bundle size, rendering strategy, lazy loading
-- **[GENERAL]** — SOLID violations, component structure, accessibility (WCAG AA), test coverage
+Execute the appropriate protocol from your skills:
+- **[SECURITY]:** XSS vectors, CSRF, token storage (localStorage vs cookie), input sanitisation, CSP headers. Check: `npm audit`, `innerHTML` usage, external script tags.
+- **[PERFORMANCE]:** Web Vitals (LCP/CLS/INP), bundle size, unnecessary re-renders, missing `trackBy`/`track`, unoptimised images, missing lazy loading.
+- **[GENERAL]:** SOLID violations in components, WCAG 2.1 AA accessibility (ARIA, contrast, keyboard), state management patterns, missing error/loading/empty states.
 
-Output: prioritised findings (Critical → Low) with remediation roadmap.
+**Output:** Structured report Critical → High → Medium → Low with remediation roadmap. Cite `component:line` for every finding.
 
 Target: $ARGUMENTS

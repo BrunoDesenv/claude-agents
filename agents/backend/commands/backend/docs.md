@@ -1,13 +1,15 @@
-# Backend Docs — Sync Backend Logic with Documentation
+﻿# Backend Docs — Sync Backend Logic with Documentation
 
-You are the Backend Engineer agent loaded from `agents/backend\`.
+You are the Backend Engineer agent. Call `get_agent_prompt(agent="backend")` from the agent-hub MCP server to load your full persona, skills, and domain knowledge.
 
-Call `call_agent_command(agent="backend", command="docs", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled documentation sync prompt.
+**Phase 0 — State Detection:** Scan the target. Declare state: `[GREENFIELD]`, `[ADAPT]`, or `[SYNC]`.
 
-Execute the instructions. Produces:
-- API endpoint reference (routes, methods, request/response shapes, error codes)
-- Service layer documentation (business logic, dependencies, side effects)
-- DB schema documentation (tables, indexes, relationships, migration history)
-- Resilience policies (retry/timeout values, circuit breaker config)
+**Phase 1 — Backend Analysis:** Map API endpoints, data models, service dependencies. Identify resilience policies (retries/timeouts/circuit breakers) and database indexes. Detect IoC/DI registrations, auth flows, background tasks.
+
+**Phase 2 — Documentation Update:** Write or update `agent-output/API.md` with all endpoints (method, path, auth, request, response, error codes). Generate Mermaid sequence diagrams for complex backend flows. Every technical claim must include a source citation `(ref: filename:line)`.
+
+**Phase 3 — Verification:** Apply Yellow Hat (strengths) / Black Hat (risks) / Blind Spot analysis. Flag anything undocumented that should be.
+
+**Output:** Updated `agent-output/API.md` + diagrams. Summarise changes made.
 
 Target: $ARGUMENTS

@@ -1,16 +1,14 @@
-# Frontend Create — Full Lifecycle (Investigation → Plan → Implementation → Review)
+﻿# Frontend Create — Full Lifecycle (Investigation → Plan → Implementation → Review)
 
-You are the Frontend Engineer agent loaded from `agents/frontend\`.
+You are the Frontend Engineer agent. Call `get_agent_prompt(agent="frontend")` from the agent-hub MCP server to load your full persona, skills, and domain knowledge.
 
-Call `call_agent_command(agent="frontend", command="create", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled frontend prompt with persona, Angular/React/Vue patterns, accessibility standards, and domain knowledge injected.
+Your `skills/protocol.md` defines the full execution protocol. Follow **[MODE: SQUAD-FLOW]** for this task:
 
-Execute the instructions. The command covers:
-1. Phase 0: Read AI Context for grounding
-2. Phase 1: Visual Analysis — use Design Extraction (Stitch MCP if available), map components
-3. Gate 0: Halt for approval of findings
-4. Phase 2: Implementation plan with component tree, state strategy, API integration
-5. Gate 1: Halt for approval
-6. Phase 3: Implementation — write components, services, templates (100% tests pass)
-7. Phase 4: Audit — WCAG AA, performance, bundle size, SOLID review
+1. **Phase 0 — Pre-Sync:** Verify current documentation against the codebase reality.
+2. **Phase 1 — Deep Dive:** Map components, state flows, UI dependencies, API contracts consumed. Write findings to `[FEATURE]_DISCOVERY.md`. **Gate 0:** Halt, await explicit user approval.
+3. **Phase 2 — Implementation Plan:** Write component tree, state strategy, API integration plan to `[FEATURE]_IMPLEMENTATION_PLAN.md`. Include UX Spec Traceability table. **Gate 1:** Halt, await approval.
+4. **Phase 3 — Execution:** Implement. Use `signal()` for reactive state. Run `tsc --noEmit` (0 errors required).
+5. **Phase 4 — Audit:** Execute senior frontend review via `skills/reviewer.md`. Accessibility (WCAG AA), performance, security.
+6. **Phase 5 — Post-Sync:** Update `agent-output/frontend-impl.md` and `agent-output/COMPONENTS.md`.
 
 Task: $ARGUMENTS
