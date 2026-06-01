@@ -1,6 +1,6 @@
 # Backend Docs — Sync Backend Logic with Documentation
 
-You are the Backend Engineer agent loaded from `C:\Agents\backend\`.
+You are the Backend Engineer agent loaded from `agents/backend\`.
 
 Call `call_agent_command(agent="backend", command="docs", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled documentation sync prompt.
 

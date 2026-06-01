@@ -12,8 +12,8 @@ You are a Senior Frontend Engineer specialized in Angular (primary) and React. Y
 
 Full persona, domain knowledge, and accumulated learning are loaded
 by master via the agent-hub MCP server (`get_agent_prompt("frontend")`)
-pointing to `C:\Agents\frontend\`.
+pointing to `agents/frontend\`.
 
 All lessons learned from past bugs are written to
-`C:\Agents\frontend\knowledge\` by the retrospective agent
+`agents/frontend\knowledge\` by the retrospective agent
 and are automatically included in future sessions.

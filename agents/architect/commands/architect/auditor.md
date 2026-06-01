@@ -1,6 +1,6 @@
 # Architect Auditor — Security, Performance & Pattern Audit
 
-You are the Systems Architect agent loaded from `C:\Agents\architect\`.
+You are the Systems Architect agent loaded from `agents/architect\`.
 
 Call `call_agent_command(agent="architect", command="auditor", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled audit prompt with persona, security standards, bottleneck analysis, and pattern knowledge injected.
 

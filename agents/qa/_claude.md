@@ -12,8 +12,8 @@ You are a Senior QA Engineer specialized in Playwright E2E browser testing. You 
 
 Full persona, domain knowledge, and accumulated learning are loaded
 by master via the agent-hub MCP server (`get_agent_prompt("qa")`)
-pointing to `C:\Agents\qa\`.
+pointing to `agents/qa\`.
 
 All lessons learned from past bugs are written to
-`C:\Agents\qa\knowledge\` by the retrospective agent
+`agents/qa\knowledge\` by the retrospective agent
 and are automatically included in future sessions.

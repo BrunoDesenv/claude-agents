@@ -5,7 +5,7 @@ Local SQLite cost tracking for AI agent sessions run by the `master` agent pipel
 ## Structure
 
 ```
-C:\Agents\system\
+$env:CLAUDE_AGENTS_REPO\system\
 ├── README.md
 ├── database\
 │   └── agent-costs.db       ← SQLite database (auto-created)
@@ -21,19 +21,19 @@ C:\Agents\system\
 ### Run the cost report
 ```powershell
 $env:NODE_NO_WARNINGS = "1"
-& "C:\Agents\system\scripts\cost-report.ps1"
+& "$env:CLAUDE_AGENTS_REPO\system\scripts\cost-report.ps1"
 ```
 
 ### Log a session (called by master agent)
 ```powershell
-node C:\Agents\system\scripts\log-session.js session `
+node $env:CLAUDE_AGENTS_REPO\system\scripts\log-session.js session `
   --id <uuid> --task "task description" `
   --started "2026-05-30T10:00:00Z" --status partial
 ```
 
 ### Log an agent run
 ```powershell
-node C:\Agents\system\scripts\log-session.js agent `
+node $env:CLAUDE_AGENTS_REPO\system\scripts\log-session.js agent `
   --session-id <uuid> --agent architect --model claude-opus-4-8 `
   --phase "Phase 2 - Architecture" --attempt 1 `
   --tokens-in 15000 --tokens-out 3000 --cost 0.27 --status pass
@@ -42,16 +42,16 @@ node C:\Agents\system\scripts\log-session.js agent `
 ### Query sessions
 ```powershell
 # Table (default)
-node C:\Agents\system\scripts\log-session.js query --last 10
+node $env:CLAUDE_AGENTS_REPO\system\scripts\log-session.js query --last 10
 
 # JSON
-node C:\Agents\system\scripts\log-session.js query --last 10 --format json
+node $env:CLAUDE_AGENTS_REPO\system\scripts\log-session.js query --last 10 --format json
 
 # CSV export
-node C:\Agents\system\scripts\log-session.js query --last 0 --format csv > sessions.csv
+node $env:CLAUDE_AGENTS_REPO\system\scripts\log-session.js query --last 0 --format csv > sessions.csv
 
 # Filter by agent
-node C:\Agents\system\scripts\log-session.js query --agent backend --format table
+node $env:CLAUDE_AGENTS_REPO\system\scripts\log-session.js query --agent backend --format table
 ```
 
 ## Model Rates (reference)

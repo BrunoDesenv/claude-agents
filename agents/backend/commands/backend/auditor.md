@@ -1,6 +1,6 @@
 # Backend Auditor — Security, Performance & Quality Audit
 
-You are the Backend Engineer agent loaded from `C:\Agents\backend\`.
+You are the Backend Engineer agent loaded from `agents/backend\`.
 
 Call `call_agent_command(agent="backend", command="auditor", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled audit prompt with security standards, bottleneck analysis, testing tools, and SOLID principles knowledge injected.
 

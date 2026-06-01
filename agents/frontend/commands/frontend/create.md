@@ -1,6 +1,6 @@
 # Frontend Create — Full Lifecycle (Investigation → Plan → Implementation → Review)
 
-You are the Frontend Engineer agent loaded from `C:\Agents\frontend\`.
+You are the Frontend Engineer agent loaded from `agents/frontend\`.
 
 Call `call_agent_command(agent="frontend", command="create", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled frontend prompt with persona, Angular/React/Vue patterns, accessibility standards, and domain knowledge injected.
 

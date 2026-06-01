@@ -2,11 +2,11 @@
 
 ## Overview
 
-This is a multi-agent AI engineering team hosted at `C:\Agents` and loaded via the `agent-hub` MCP server (`get_agent_prompt`). The system covers the full software delivery lifecycle: architecture decisions, research, UX design, backend and frontend implementation, validation, QA, and documentation.
+This is a multi-agent AI engineering team hosted at `agents/` and loaded via the `agent-hub` MCP server (`get_agent_prompt`). The system covers the full software delivery lifecycle: architecture decisions, research, UX design, backend and frontend implementation, validation, QA, and documentation.
 
 Each agent is a specialist with clearly bounded responsibilities. **Master** is the sole orchestrator — it spawns all other agents in sequence, enforces approval gates, and routes bugs to their owners. Specialist agents execute and write their own documentation artifacts. The **documentation** agent synthesises at the end.
 
-Agents are loaded by the MCP server from `C:\Agents\[agent]\brain\persona.md` plus all files in `skills\` and `knowledge\`. This means knowledge files added by retrospective agents are automatically included in future runs without any configuration change.
+Agents are loaded by the MCP server from `agents/[agent]/brain/persona.md` plus all files in `skills\` and `knowledge\`. This means knowledge files added by retrospective agents are automatically included in future runs without any configuration change.
 
 ---
 
@@ -26,7 +26,7 @@ master
   └─ Phase 6.5 validator          → validator-post-impl.md (DRIFT_REVIEW)
   └─ [GATE 2 — user approves implementation]
   └─ Phase 7:  qa                 → QA-REPORT.md + evidence/
-  └─ Phase 7.5 retrospective      → C:\Agents\[agent]\knowledge\[lesson].md  (auto, on bug)
+  └─ Phase 7.5 retrospective      → agents/[agent]/knowledge/[lesson].md  (auto, on bug)
   └─ [GATE 3 — user approves QA]
   └─ Phase 8:  documentation      → README.md, CHANGELOG.md
   └─ Phase 9:  master             → session-summary.md + cost DB write
@@ -73,14 +73,14 @@ Every session. Entry point via `claude --agent master` or by setting `"agent": "
 - `task.md` — verbatim task written at Phase 1
 - `requirements.md` — discipline breakdown (backend/frontend/ux/research yes/no)
 - `session-summary.md` — final session summary with cost estimate
-- Cost entry written to `C:\Agents\system\database\agent-costs.db`
+- Cost entry written to `agents/system\database\agent-costs.db`
 
 **Files it may write:**
 - `[session-dir]/task.md`
 - `[session-dir]/requirements.md`
 - `[session-dir]/session-summary.md`
-- `C:\Agents\system\database\agent-costs.db` (via log-session.js)
-- `C:\Agents\[agent]\knowledge\[lesson].md` (via retrospective sub-agent)
+- `agents/system\database\agent-costs.db` (via log-session.js)
+- `agents/[agent]/knowledge/[lesson].md` (via retrospective sub-agent)
 
 **Approval gates:**
 - **Gate 0** — after architect: present ADR summary, halt until user approves
@@ -94,9 +94,9 @@ Every session. Entry point via `claude --agent master` or by setting `"agent": "
 
 **Available commands:** None (master does not use TOML commands)
 
-**Relevant skills:** None defined in `C:\Agents\master\skills\`
+**Relevant skills:** None defined in `agents/master\skills\`
 
-**Knowledge used:** None defined in `C:\Agents\master\knowledge\`
+**Knowledge used:** None defined in `agents/master\knowledge\`
 
 **Limits and restrictions:**
 - PROHIBITED from writing code directly
@@ -106,7 +106,7 @@ Every session. Entry point via `claude --agent master` or by setting `"agent": "
 - PROHIBITED from spawning an agent without first calling `get_agent_prompt` from agent-hub MCP
 
 **Sources:**
-- `C:\Agents\master\brain\persona.md`
+- `agents/master\brain\persona.md`
 - `C:\Users\bru_b\.claude\agents\master.md` (full orchestration pipeline definition)
 
 ---
@@ -169,11 +169,11 @@ Always first in every session. Also use directly for: "design this", "ADR for X"
 - Does NOT skip security or performance analysis when flagged by task description
 
 **Sources:**
-- `C:\Agents\architect\brain\persona.md`
-- `C:\Agents\architect\skills\` (4 files)
-- `C:\Agents\architect\knowledge\` (6 files)
-- `C:\Agents\architect\commands\architect\` (3 TOML files)
-- `C:\Agents\architect\README.md`
+- `agents/architect\brain\persona.md`
+- `agents/architect\skills\` (4 files)
+- `agents/architect\knowledge\` (6 files)
+- `agents/architect\commands\architect\` (3 TOML files)
+- `agents/architect\README.md`
 
 ---
 
@@ -240,11 +240,11 @@ When the task requires API endpoints, services, DB schema, auth flows, or server
 - xUnit tests are backend's exclusive responsibility — QA agent does NOT run `dotnet test`
 
 **Sources:**
-- `C:\Agents\backend\brain\persona.md`
-- `C:\Agents\backend\skills\` (5 files)
-- `C:\Agents\backend\knowledge\` (7 files)
-- `C:\Agents\backend\commands\backend\` (3 TOML files)
-- `C:\Agents\backend\README.md`
+- `agents/backend\brain\persona.md`
+- `agents/backend\skills\` (5 files)
+- `agents/backend\knowledge\` (7 files)
+- `agents/backend\commands\backend\` (3 TOML files)
+- `agents/backend\README.md`
 
 ---
 
@@ -309,11 +309,11 @@ When the task requires UI components, pages, routing, forms, or state management
 - UX Spec Traceability table is mandatory when `ux-plan.md` exists — missing rows = FAIL at validator
 
 **Sources:**
-- `C:\Agents\frontend\brain\persona.md`
-- `C:\Agents\frontend\skills\` (5 files)
-- `C:\Agents\frontend\knowledge\` (7 files)
-- `C:\Agents\frontend\commands\frontend\` (3 TOML files)
-- `C:\Agents\frontend\README.md`
+- `agents/frontend\brain\persona.md`
+- `agents/frontend\skills\` (5 files)
+- `agents/frontend\knowledge\` (7 files)
+- `agents/frontend\commands\frontend\` (3 TOML files)
+- `agents/frontend\README.md`
 
 ---
 
@@ -357,7 +357,7 @@ After post-implementation validation (drift review) passes. Also use directly fo
 - `skills/evidence-collection.md` — Mandatory Playwright config: `screenshot: 'on'`, `video: { mode: 'on', size: 1280×720 }`, `trace: 'retain-on-failure'`, `outputDir: './evidence'`
 - `skills/test-patterns.md` — Test structure (beforeEach, naming, independence), timezone testing (`test.use({ timezoneId: 'America/Sao_Paulo' })`) for UTC-3 scenarios
 
-**Knowledge used:** None defined in `C:\Agents\qa\knowledge\`
+**Knowledge used:** None defined in `agents/qa\knowledge\`
 
 **Limits and restrictions:**
 - NEVER runs `dotnet test`, xUnit, NUnit, or any developer tests — those belong to backend agent
@@ -366,9 +366,9 @@ After post-implementation validation (drift review) passes. Also use directly fo
 - Timezone test is MANDATORY for any feature with datetime-local inputs or UTC conversion
 
 **Sources:**
-- `C:\Agents\qa\brain\persona.md`
-- `C:\Agents\qa\skills\evidence-collection.md`
-- `C:\Agents\qa\skills\test-patterns.md`
+- `agents/qa\brain\persona.md`
+- `agents/qa\skills\evidence-collection.md`
+- `agents/qa\skills\test-patterns.md`
 
 ---
 
@@ -406,9 +406,9 @@ Also use directly for: "validate this", "review implementation", "check requirem
 
 **Available commands:** None
 
-**Relevant skills:** None defined in `C:\Agents\validator\skills\`
+**Relevant skills:** None defined in `agents/validator\skills\`
 
-**Knowledge used:** None defined in `C:\Agents\validator\knowledge\`
+**Knowledge used:** None defined in `agents/validator\knowledge\`
 
 **Limits and restrictions:**
 - Does NOT write code
@@ -416,7 +416,7 @@ Also use directly for: "validate this", "review implementation", "check requirem
 - Does NOT approve plans with blocking issues (security gaps, missing requirements coverage, broken architectural alignment)
 
 **Sources:**
-- `C:\Agents\validator\brain\persona.md`
+- `agents/validator\brain\persona.md`
 
 ---
 
@@ -456,7 +456,7 @@ When the task contains unknowns, technology choices, or unclear approaches. Spaw
 **Relevant skills:**
 - `skills/browsing.md` — Research Protocol: Phase 0 (DISCOVERY), Phase 1 (Information Gathering: ≥3 sources, 12-24 month temporal relevance, data hierarchy L1/L2/L3), Phase 2 (Formatting: citations, tables, professional language)
 
-**Knowledge used:** None defined in `C:\Agents\researcher\knowledge\`
+**Knowledge used:** None defined in `agents/researcher\knowledge\`
 
 **Limits and restrictions:**
 - NEVER runs before architect.md exists (master enforces prerequisite check)
@@ -464,11 +464,11 @@ When the task contains unknowns, technology choices, or unclear approaches. Spaw
 - Does NOT use software/sports metaphors (operational style constraint)
 
 **Sources:**
-- `C:\Agents\researcher\brain\persona.md`
-- `C:\Agents\researcher\skills\browsing.md`
-- `C:\Agents\researcher\commands\researcher\investigate.toml`
-- `C:\Agents\researcher\commands\researcher\report.toml`
-- `C:\Agents\researcher\README.md`
+- `agents/researcher\brain\persona.md`
+- `agents/researcher\skills\browsing.md`
+- `agents/researcher\commands\researcher\investigate.toml`
+- `agents/researcher\commands\researcher\report.toml`
+- `agents/researcher\README.md`
 
 ---
 
@@ -502,16 +502,16 @@ When tasks involve user-facing screens, interactions, accessibility requirements
 
 **Available commands:** None
 
-**Relevant skills:** None defined in `C:\Agents\ux\skills\`
+**Relevant skills:** None defined in `agents/ux\skills\`
 
-**Knowledge used:** None defined in `C:\Agents\ux\knowledge\`
+**Knowledge used:** None defined in `agents/ux\knowledge\`
 
 **Limits and restrictions:**
 - Does NOT write application code (HTML, CSS, TypeScript, etc.)
 - ADR Boundary Mapping is MANDATORY: every proposed component must declare its ADR service boundary; cross-boundary components must be flagged for architect review before the plan is finalised
 
 **Sources:**
-- `C:\Agents\ux\brain\persona.md`
+- `agents/ux\brain\persona.md`
 
 ---
 
@@ -550,9 +550,9 @@ Always last in every session, after QA passes. Also use directly for: "write ADR
 
 **Available commands:** None
 
-**Relevant skills:** None defined in `C:\Agents\documentation\skills\`
+**Relevant skills:** None defined in `agents/documentation\skills\`
 
-**Knowledge used:** None defined in `C:\Agents\documentation\knowledge\`
+**Knowledge used:** None defined in `agents/documentation\knowledge\`
 
 **Limits and restrictions:**
 - Does NOT rewrite ADR.md, API.md, or COMPONENTS.md — those are owned by their respective agents
@@ -560,7 +560,7 @@ Always last in every session, after QA passes. Also use directly for: "write ADR
 - If any source doc is missing, flags it explicitly rather than inventing content
 
 **Sources:**
-- `C:\Agents\documentation\brain\persona.md`
+- `agents/documentation\brain\persona.md`
 
 ---
 
@@ -572,9 +572,9 @@ The `system/` folder is not an agent. It is the cost tracking and reporting infr
 
 **Purpose:** Persist every master session and agent run to a local SQLite database. Enables cost monitoring, usage analytics, and historical session lookup without any external service.
 
-**Location:** `C:\Agents\system\`
+**Location:** `agents/system\`
 
-**Database:** `C:\Agents\system\database\agent-costs.db`
+**Database:** `agents/system\database\agent-costs.db`
 
 SQLite schema:
 ```sql
@@ -618,7 +618,7 @@ CREATE TABLE agent_runs (
 
 **How to run the cost report:**
 ```powershell
-C:\Agents\system\scripts\cost-report.ps1
+agents/system\scripts\cost-report.ps1
 ```
 
 **Model rates used for calculations:**
@@ -638,7 +638,7 @@ C:\Agents\system\scripts\cost-report.ps1
 
 ### Broken TOML references (15 total)
 
-The following `!{cat ...}` probes in TOML command files reference paths that do not exist under `C:\Agents`. These will cause `call_agent_command` to fail silently (the probe is replaced with an error string). The `get_agent_prompt` path (used by master) is unaffected.
+The following `!{cat ...}` probes in TOML command files reference paths that do not exist under `agents/`. These will cause `call_agent_command` to fail silently (the probe is replaced with an error string). The `get_agent_prompt` path (used by master) is unaffected.
 
 | Missing file | Referenced by | TOML count |
 |---|---|---|
@@ -646,7 +646,7 @@ The following `!{cat ...}` probes in TOML command files reference paths that do 
 | `common/knowledge/auth_standard.md` | architect (auditor), backend (auditor) | 2 TOMLs |
 | `brainstormer/knowledge/gatekeeping.md` | researcher (investigate, report) | 2 TOMLs |
 
-**Root cause:** These agent folders and their `common/` knowledge were removed from `C:\Agents` to enforce the "no shared knowledge" design principle. The TOML files were copied from `C:\ai-agents` and not updated to reflect the removal.
+**Root cause:** These agent folders and their `common/` knowledge were removed from `agents/` to enforce the "no shared knowledge" design principle. The TOML files were copied from `C:\ai-agents` and not updated to reflect the removal.
 
 **Impact:** Only affects Gemini CLI / AntiGravity slash commands (`/architect:create`, etc.). The `get_agent_prompt` path used by Claude Code and master is fully functional.
 

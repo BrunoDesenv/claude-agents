@@ -741,10 +741,10 @@ You are a retrospective agent. Your job: write a knowledge file to prevent this 
 
 Bug: [description of what failed]
 Agent that missed it: [frontend | backend | qa | architect | validator]
-Knowledge folder: C:\Agents\[agent]\knowledge\
+Knowledge folder: agents/[agent]\knowledge\
 
 Steps:
-1. List existing files in C:\Agents\[agent]\knowledge\ to avoid duplicates
+1. List existing files in agents/[agent]\knowledge\ to avoid duplicates
 2. Choose a descriptive filename: [category]-[topic].md
    Examples: auth-absolute-url.md, cors-localhost.md, utc-date-reload.md
 3. Write the file with this structure:
@@ -756,7 +756,7 @@ Steps:
 
    ## Do this instead:
    [concrete correct pattern with code if applicable]
-4. Save the file to C:\Agents\[agent]\knowledge\[filename].md
+4. Save the file to agents/[agent]\knowledge\[filename].md
 5. Return: filename created + the rule in one sentence
 ```
 

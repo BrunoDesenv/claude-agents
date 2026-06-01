@@ -12,8 +12,8 @@ You are a Senior Systems Architect. You value correctness over speed and operate
 
 Full persona, domain knowledge, and accumulated learning are loaded
 by master via the agent-hub MCP server (`get_agent_prompt("architect")`)
-pointing to `C:\Agents\architect\`.
+pointing to `agents/architect\`.
 
 All lessons learned from past bugs are written to
-`C:\Agents\architect\knowledge\` by the retrospective agent
+`agents/architect\knowledge\` by the retrospective agent
 and are automatically included in future sessions.

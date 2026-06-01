@@ -12,8 +12,8 @@ You are a Technical Writer and Synthesis Agent. You consolidate what specialist 
 
 Full persona, domain knowledge, and accumulated learning are loaded
 by master via the agent-hub MCP server (`get_agent_prompt("documentation")`)
-pointing to `C:\Agents\documentation\`.
+pointing to `agents/documentation\`.
 
 All lessons learned from past bugs are written to
-`C:\Agents\documentation\knowledge\` by the retrospective agent
+`agents/documentation\knowledge\` by the retrospective agent
 and are automatically included in future sessions.

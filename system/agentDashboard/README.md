@@ -7,7 +7,7 @@ A local real-time dashboard that visualises multi-agent AI pipeline activity. Wh
 ## Quick Start
 
 ```powershell
-cd C:\Agents\system\agentDashboard
+cd $env:CLAUDE_AGENTS_REPO\system\agentDashboard
 .\start.ps1
 ```
 
@@ -59,9 +59,9 @@ spa/src/app/features/dashboard/
 Browser at http://localhost:4300
 ```
 
-State is also written to `C:\Agents\system\agentDashboard\state.json` on every event, and archived to `history/<sessionId>.json` on `session-end`. The API reloads `state.json` on startup so the dashboard survives a restart mid-session.
+State is also written to `$env:CLAUDE_AGENTS_REPO\system\agentDashboard\state.json` on every event, and archived to `history/<sessionId>.json` on `session-end`. The API reloads `state.json` on startup so the dashboard survives a restart mid-session.
 
-Messages are stored separately in `C:\Agents\system\agentDashboard\messages.json`. This file is not session-scoped and accumulates messages across sessions; all queries are filtered by `sessionId`.
+Messages are stored separately in `$env:CLAUDE_AGENTS_REPO\system\agentDashboard\messages.json`. This file is not session-scoped and accumulates messages across sessions; all queries are filtered by `sessionId`.
 
 ---
 
@@ -257,7 +257,7 @@ Master is a turn-based agent — it cannot interrupt itself to handle an inbound
 
 ### Storage
 
-Messages are stored in `C:\Agents\system\agentDashboard\messages.json`, separate from `state.json`. They are not included in `DashboardState` and are not broadcast as part of `StateUpdated` events. The `messages` signal in `DashboardService` is populated independently via `GET /api/dashboard/messages` on connect/reconnect and updated in real time via `MessageReceived`/`MessageReplied` SignalR events.
+Messages are stored in `$env:CLAUDE_AGENTS_REPO\system\agentDashboard\messages.json`, separate from `state.json`. They are not included in `DashboardState` and are not broadcast as part of `StateUpdated` events. The `messages` signal in `DashboardService` is populated independently via `GET /api/dashboard/messages` on connect/reconnect and updated in real time via `MessageReceived`/`MessageReplied` SignalR events.
 
 ---
 
@@ -398,7 +398,7 @@ These are intentionally separate from any other local dev ports (e.g. 5000/4200 
 **Rebuild API**
 
 ```powershell
-cd C:\Agents\system\agentDashboard\api\AgentDashboard.Api
+cd $env:CLAUDE_AGENTS_REPO\system\agentDashboard\api\AgentDashboard.Api
 dotnet build
 dotnet run
 ```
@@ -406,16 +406,16 @@ dotnet run
 **Rebuild SPA**
 
 ```powershell
-cd C:\Agents\system\agentDashboard\spa
+cd $env:CLAUDE_AGENTS_REPO\system\agentDashboard\spa
 npm install
 npm run start -- --port 4300
 ```
 
 **State files**
 
-- `C:\Agents\system\agentDashboard\state.json` — current session state, overwritten on every event
-- `C:\Agents\system\agentDashboard\history\<sessionId>.json` — one file per completed session
-- `C:\Agents\system\agentDashboard\messages.json` — all messages across sessions, filtered by sessionId at query time
+- `$env:CLAUDE_AGENTS_REPO\system\agentDashboard\state.json` — current session state, overwritten on every event
+- `$env:CLAUDE_AGENTS_REPO\system\agentDashboard\history\<sessionId>.json` — one file per completed session
+- `$env:CLAUDE_AGENTS_REPO\system\agentDashboard\messages.json` — all messages across sessions, filtered by sessionId at query time
 
 ---
 

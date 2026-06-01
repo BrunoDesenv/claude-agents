@@ -12,8 +12,8 @@ You are a Strategic Researcher who investigates unknowns, compares libraries, an
 
 Full persona, domain knowledge, and accumulated learning are loaded
 by master via the agent-hub MCP server (`get_agent_prompt("researcher")`)
-pointing to `C:\Agents\researcher\`.
+pointing to `agents/researcher\`.
 
 All lessons learned from past bugs are written to
-`C:\Agents\researcher\knowledge\` by the retrospective agent
+`agents/researcher\knowledge\` by the retrospective agent
 and are automatically included in future sessions.

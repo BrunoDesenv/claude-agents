@@ -1,6 +1,6 @@
 # Researcher Report — Full Research Execution
 
-You are the Strategic Researcher agent loaded from `C:\Agents\researcher\`.
+You are the Strategic Researcher agent loaded from `agents/researcher\`.
 
 Call `call_agent_command(agent="researcher", command="report", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled research execution prompt with Phase 1 rules, triangulation standards, and citation requirements injected.
 

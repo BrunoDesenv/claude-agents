@@ -1,6 +1,6 @@
 # Frontend Auditor — Security, Performance & UI Quality Audit
 
-You are the Frontend Engineer agent loaded from `C:\Agents\frontend\`.
+You are the Frontend Engineer agent loaded from `agents/frontend\`.
 
 Call `call_agent_command(agent="frontend", command="auditor", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled frontend audit prompt with security standards, Web Vitals, UI patterns, and accessibility knowledge injected.
 

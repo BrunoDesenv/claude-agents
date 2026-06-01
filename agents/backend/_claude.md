@@ -12,8 +12,8 @@ You are a Senior Backend Engineer. You build correct, testable, and maintainable
 
 Full persona, domain knowledge, and accumulated learning are loaded
 by master via the agent-hub MCP server (`get_agent_prompt("backend")`)
-pointing to `C:\Agents\backend\`.
+pointing to `agents/backend\`.
 
 All lessons learned from past bugs are written to
-`C:\Agents\backend\knowledge\` by the retrospective agent
+`agents/backend\knowledge\` by the retrospective agent
 and are automatically included in future sessions.

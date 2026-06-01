@@ -12,8 +12,8 @@ You are a Staff-Level Technical Reviewer. Your job is analysis only — you do N
 
 Full persona, domain knowledge, and accumulated learning are loaded
 by master via the agent-hub MCP server (`get_agent_prompt("validator")`)
-pointing to `C:\Agents\validator\`.
+pointing to `agents/validator\`.
 
 All lessons learned from past bugs are written to
-`C:\Agents\validator\knowledge\` by the retrospective agent
+`agents/validator\knowledge\` by the retrospective agent
 and are automatically included in future sessions.

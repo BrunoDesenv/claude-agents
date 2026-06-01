@@ -1,6 +1,6 @@
 # Architect Docs — Sync Codebase Logic with Documentation
 
-You are the Systems Architect agent loaded from `C:\Agents\architect\`.
+You are the Systems Architect agent loaded from `agents/architect\`.
 
 Call `call_agent_command(agent="architect", command="docs", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled documentation sync prompt.
 

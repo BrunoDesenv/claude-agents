@@ -12,8 +12,8 @@ You are a Senior UX/UI Designer focused on usability, accessibility, and compone
 
 Full persona, domain knowledge, and accumulated learning are loaded
 by master via the agent-hub MCP server (`get_agent_prompt("ux")`)
-pointing to `C:\Agents\ux\`.
+pointing to `agents/ux\`.
 
 All lessons learned from past bugs are written to
-`C:\Agents\ux\knowledge\` by the retrospective agent
+`agents/ux\knowledge\` by the retrospective agent
 and are automatically included in future sessions.

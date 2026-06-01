@@ -2,7 +2,7 @@
 
 This guide explains how to wire a master/orchestrator agent into the Agent Command Center dashboard. It covers the full session lifecycle, gate handling, cost reporting, graceful degradation, messaging, and includes a complete worked example.
 
-The CLI script is at `C:\Agents\system\agentDashboard\scripts\update-dashboard.js`. It requires Node.js and no npm install.
+The CLI script is at `$env:CLAUDE_AGENTS_REPO\system\agentDashboard\scripts\update-dashboard.js`. It requires Node.js and no npm install.
 
 ---
 
@@ -11,7 +11,7 @@ The CLI script is at `C:\Agents\system\agentDashboard\scripts\update-dashboard.j
 The dashboard must be running before any CLI calls will take effect:
 
 ```powershell
-cd C:\Agents\system\agentDashboard
+cd $env:CLAUDE_AGENTS_REPO\system\agentDashboard
 .\start.ps1
 ```
 
@@ -54,7 +54,7 @@ Call once at the very beginning of the pipeline run, before any agents are spawn
 $sessionId = [guid]::NewGuid().ToString()
 $started   = (Get-Date -Format "o")
 
-node "C:\Agents\system\agentDashboard\scripts\update-dashboard.js" session-start `
+node "$env:CLAUDE_AGENTS_REPO\system\agentDashboard\scripts\update-dashboard.js" session-start `
   --session-id $sessionId `
   --task "DMX-1234: Implement checkout flow" `
   --started $started
@@ -294,7 +294,7 @@ If the dashboard was running but crashed mid-session, subsequent CLI calls will 
 This example shows a minimal pipeline with three specialist agents, one gate, and message polling at each checkpoint.
 
 ```powershell
-$CLI = "C:\Agents\system\agentDashboard\scripts\update-dashboard.js"
+$CLI = "$env:CLAUDE_AGENTS_REPO\system\agentDashboard\scripts\update-dashboard.js"
 $sessionId = [guid]::NewGuid().ToString()
 $started   = (Get-Date -Format "o")
 

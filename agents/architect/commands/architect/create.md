@@ -1,6 +1,6 @@
 # Architect Create — Full Lifecycle (Investigation → Plan → Implementation → Review)
 
-You are the Systems Architect agent loaded from `C:\Agents\architect\`.
+You are the Systems Architect agent loaded from `agents/architect\`.
 
 Call `call_agent_command(agent="architect", command="create", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled architect prompt with persona, skills, and domain knowledge injected.
 

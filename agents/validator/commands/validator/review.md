@@ -1,6 +1,6 @@
 # Validator Review — Plan Review or Drift Review
 
-You are the Validator agent loaded from `C:\Agents\validator\`.
+You are the Validator agent loaded from `agents/validator\`.
 
 Call `get_agent_prompt(agent="validator")` from the agent-hub MCP server to load your full persona with SOLID principles, security checklist, and review patterns knowledge.
 

@@ -157,7 +157,7 @@ After all bugs fixed:
   7. If still FAIL after 2 cycles → report to user and stop
 ```
 
-**After QA passes:** Spawn retrospective agent to write lessons to `C:\Agents\[agent]\knowledge\`
+**After QA passes:** Spawn retrospective agent to write lessons to `agents/[agent]/knowledge/`
 
 ---
 
@@ -197,8 +197,8 @@ After all bugs fixed:
 - Close session in cost DB (status=completed)
 - Update dashboard (session-end)
 
-**Cost DB path:** `C:\Agents\system\cost-tracker\database\agent-costs.db`
-**Report:** `& "C:\Agents\system\cost-tracker\scripts\cost-report.ps1"`
+**Cost DB path:** `$env:CLAUDE_AGENTS_REPO\system\cost-tracker\database\agent-costs.db`
+**Report:** `& "$env:CLAUDE_AGENTS_REPO\system\cost-tracker\scripts\cost-report.ps1"`
 
 ---
 

@@ -2,7 +2,7 @@
 
 > **Purpose of this document.** This PRD is the input artifact for an autonomous multi-agent build.
 > It describes **WHAT** to build and the **acceptance criteria** to verify it.
-> Output directory: `C:\Agents\system\agentDashboard\`
+> Output directory: `$env:CLAUDE_AGENTS_REPO\system\agentDashboard\`
 
 ---
 
@@ -10,7 +10,7 @@
 
 A local interactive web dashboard built with **Angular 19 + ASP.NET Core (.NET 8)** that visualises multi-agent AI pipeline activity in real-time.
 
-**The agents being visualised are the AI specialist agents defined in `C:\Agents\`:**
+**The agents being visualised are the AI specialist agents defined in `agents/`:**
 - **master** — the orchestrator that coordinates the entire pipeline
 - **architect** — designs architecture and produces ADRs
 - **backend** — builds APIs, services, and tests
@@ -89,7 +89,7 @@ The system has three components:
 **Hard constraints**
 - `update-dashboard.js` — zero npm dependencies, only Node.js built-ins (`http`, `url`, `fs`)
 - Angular components are standalone (no NgModules)
-- All paths use `C:\Agents\system\agentDashboard\` as root
+- All paths use `$env:CLAUDE_AGENTS_REPO\system\agentDashboard\` as root
 - API must allow CORS from `http://localhost:4300`
 
 ---
@@ -273,7 +273,7 @@ spa/src/app/
 
 ## 9. State Writer CLI
 
-**File:** `C:\Agents\system\agentDashboard\scripts\update-dashboard.js`
+**File:** `$env:CLAUDE_AGENTS_REPO\system\agentDashboard\scripts\update-dashboard.js`
 
 Zero npm dependencies — uses only `node:http` and `node:url`.
 
@@ -298,10 +298,10 @@ If the API is not running, the CLI fails silently (non-zero exit code, no crash)
 **`start.ps1`:**
 ```powershell
 # Starts the API and opens the SPA
-Start-Process dotnet -ArgumentList "run" -WorkingDirectory "C:\Agents\system\agentDashboard\api\AgentDashboard.Api"
+Start-Process dotnet -ArgumentList "run" -WorkingDirectory "$env:CLAUDE_AGENTS_REPO\system\agentDashboard\api\AgentDashboard.Api"
 Start-Sleep 3
 Start-Process "http://localhost:4300"
-cd "C:\Agents\system\agentDashboard\spa"
+cd "$env:CLAUDE_AGENTS_REPO\system\agentDashboard\spa"
 ng serve --port 4300 --no-open
 ```
 
@@ -363,5 +363,5 @@ ng serve --port 4300 --no-open
 
 ## 13. PROGRESS.md
 
-A `PROGRESS.md` at `C:\Agents\system\agentDashboard\PROGRESS.md`, written append-only as work proceeds.
+A `PROGRESS.md` at `$env:CLAUDE_AGENTS_REPO\system\agentDashboard\PROGRESS.md`, written append-only as work proceeds.
 Final section: checklist AC-1…AC-22 marked pass/fail with verification method.

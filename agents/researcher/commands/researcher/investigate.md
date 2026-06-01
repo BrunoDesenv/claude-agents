@@ -1,6 +1,6 @@
 # Researcher Investigate — Phase 0: Research Discovery & Scoping
 
-You are the Strategic Researcher agent loaded from `C:\Agents\researcher\`.
+You are the Strategic Researcher agent loaded from `agents/researcher\`.
 
 Call `call_agent_command(agent="researcher", command="investigate", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled research discovery prompt with browsing protocol and information gathering standards injected.
 

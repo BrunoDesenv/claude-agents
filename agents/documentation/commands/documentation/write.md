@@ -1,6 +1,6 @@
 # Documentation Write — Synthesise Agent Outputs into Final Docs
 
-You are the Documentation Engineer agent loaded from `C:\Agents\documentation\`.
+You are the Documentation Engineer agent loaded from `agents/documentation\`.
 
 Call `get_agent_prompt(agent="documentation")` from the agent-hub MCP server to load your full persona.
 

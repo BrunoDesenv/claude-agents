@@ -30,14 +30,14 @@ Phase 9: Summary & Cost (session-summary.md + DB close)
 
 ## Special Features
 - **Bug detection at Phase 1**: detects "erro", "bug", "broken", "401" etc. and runs retrospective first
-- **Retrospective agent**: after Phase 7.5, writes new knowledge files to `C:\Agents\[agent]\knowledge\` automatically
-- **Cost tracking**: logs every agent run to `C:\Agents\system\database\agent-costs.db`
+- **Retrospective agent**: after Phase 7.5, writes new knowledge files to `agents/[agent]/knowledge/` automatically
+- **Cost tracking**: logs every agent run to `agents/system\database\agent-costs.db`
 - **MCP enrichment**: calls `get_agent_prompt` before every spawn for rich persona assembly
 
 ## MCP Integration
 Master calls `get_agent_prompt(agent="[name]")` from the agent-hub MCP server before spawning each agent. This assembles: brain/persona.md + skills/*.md + knowledge/*.md into a single rich prompt.
 
-AGENTS_ROOT: `C:\Agents` (set in `~/.claude/settings.json`)
+AGENTS_ROOT: `agents/` (set in `~/.claude/settings.json`)
 
 ## Cost Tracking
-Run `C:\Agents\system\scripts\cost-report.ps1` to see session history and costs.
+Run `agents/system\scripts\cost-report.ps1` to see session history and costs.

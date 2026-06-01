@@ -4,7 +4,7 @@
 
 1. List all files in the target agent's directory:
    ```
-   C:\Agents\[agent]\
+   agents/[agent]\
    ├── brain\persona.md
    ├── knowledge\*.md
    ├── skills\*.md
@@ -43,7 +43,7 @@ For each FAIL:
 
 ## Phase 3: Proposal Output
 
-Write an audit report to: `C:\Agents\forge\audits\[agent]-audit.md`
+Write an audit report to: `agents/forge\audits\[agent]-audit.md`
 
 Format:
 ```markdown

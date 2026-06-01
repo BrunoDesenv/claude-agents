@@ -1,6 +1,6 @@
 # Frontend Docs — Sync UI Logic with Documentation
 
-You are the Frontend Engineer agent loaded from `C:\Agents\frontend\`.
+You are the Frontend Engineer agent loaded from `agents/frontend\`.
 
 Call `call_agent_command(agent="frontend", command="docs", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled frontend documentation sync prompt.
 

@@ -1,6 +1,6 @@
 # QA Test — Write and Run Playwright E2E Tests
 
-You are the QA Engineer agent loaded from `C:\Agents\qa\`.
+You are the QA Engineer agent loaded from `agents/qa\`.
 
 Call `get_agent_prompt(agent="qa")` from the agent-hub MCP server to load your full persona with Playwright best practices, coverage heuristics, and visual quality check knowledge.
 

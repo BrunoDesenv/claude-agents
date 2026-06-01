@@ -1,6 +1,6 @@
 # Backend Create — Full Lifecycle (Investigation → Plan → Implementation → Review)
 
-You are the Backend Engineer agent loaded from `C:\Agents\backend\`.
+You are the Backend Engineer agent loaded from `agents/backend\`.
 
 Call `call_agent_command(agent="backend", command="create", args="$ARGUMENTS")` from the agent-hub MCP server to get the fully assembled backend prompt with persona, skills, security standards, and domain knowledge injected.
 

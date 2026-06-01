@@ -35,10 +35,10 @@ A local, self-improving multi-agent AI engineering team. Each agent is a special
 
 ```
 ~/.claude/agents/         ← thin Claude Code wrappers (frontmatter + identity)
-C:\Agents\                ← rich agent home (persona + skills + knowledge)
-C:\Agents\system\         ← infrastructure (dashboard, cost tracking, health check)
+agents/                ← rich agent home (persona + skills + knowledge)
+agents/system\         ← infrastructure (dashboard, cost tracking, health check)
 ~/.claude/commands/       ← slash commands (/architect:create, /backend:auditor, ...)
-~/.claude/mcp/agent-hub/  ← MCP server that assembles prompts from C:\Agents\
+~/.claude/mcp/agent-hub/  ← MCP server that assembles prompts from agents/
 ```
 
 ### How it works
@@ -170,7 +170,7 @@ User reports bug → master detects bug keywords
 retrospective agent spawns
     ↓
 Identifies which agent missed it → writes new rule to
-C:\Agents\[agent]\knowledge\[descriptive-name].md
+agents/[agent]\knowledge\[descriptive-name].md
     ↓
 Next time that agent runs → rule is automatically included
 (MCP reads ALL files from knowledge\ on every prompt assembly)
@@ -194,7 +194,7 @@ Next time that agent runs → rule is automatically included
 ## Directory Structure
 
 ```
-C:\Agents\
+agents/
 ├── README.md               ← you are here
 ├── AGENTS.md               ← full agent catalog
 ├── COMMANDS.md             ← slash command reference

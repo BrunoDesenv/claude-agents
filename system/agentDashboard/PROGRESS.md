@@ -149,4 +149,4 @@ AC-17 ("cost counter reflects totalCostUsd in real-time") is **partially met**: 
 
 ## AC-22 master integration note
 
-The full dashboard instrumentation is in `C:\Users\bru_b\.claude\agents\master.md`. `C:\Agents\master\brain\persona.md` is the agent-hub persona loaded by `get_agent_prompt("master")` — it does not contain orchestration logic.
+The full dashboard instrumentation is in `C:\Users\bru_b\.claude\agents\master.md`. `agents/master\brain\persona.md` is the agent-hub persona loaded by `get_agent_prompt("master")` — it does not contain orchestration logic.

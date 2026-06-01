@@ -1,7 +1,7 @@
 # Commands Reference
 
 All commands are available as `/namespace:command [args]` in Claude Code.
-They load the agent's full persona + skills + knowledge from `C:\Agents\` via the agent-hub MCP.
+They load the agent's full persona + skills + knowledge from `agents/` via the agent-hub MCP.
 
 ---
 
@@ -35,7 +35,7 @@ Teaches the agent system from a **production bug** that slipped past QA.
 
 **When to use:** When you find a bug manually that the agents should have caught.
 
-**What it does:** Identifies which agent missed the bug → writes a new rule to `C:\Agents\[agent]\knowledge\[rule].md` → agents automatically learn it on the next session.
+**What it does:** Identifies which agent missed the bug → writes a new rule to `agents/[agent]/knowledge/[rule].md` → agents automatically learn it on the next session.
 
 **Example:**
 ```
@@ -267,7 +267,7 @@ Audits an agent's definition against the agent standards (0-6 score).
 
 **Checks:** Role defined, "does NOT" restrictions, output file spec, skills/ files, knowledge/ files, gate definitions.
 
-**Output:** Audit report at `C:\Agents\forge\audits\[agent]-audit.md` with proposed fixes.
+**Output:** Audit report at `agents/forge\audits\[agent]-audit.md` with proposed fixes.
 
 **Example:**
 ```
@@ -301,5 +301,5 @@ Applies improvements approved from `/forge:audit`.
 | Generate documentation | `/documentation:write [session]` |
 | Teach agents from a bug | `/master:retrospective [bug description]` |
 | Improve an agent | `/forge:audit [agent]` → approve → `/forge:improve [agent]` |
-| Check system health | `& "C:\Agents\system\health-check.ps1"` |
-| See cost report | `& "C:\Agents\system\cost-tracker\scripts\cost-report.ps1"` |
+| Check system health | `& "$env:CLAUDE_AGENTS_REPO\system\health-check.ps1"` |
+| See cost report | `& "$env:CLAUDE_AGENTS_REPO\system\cost-tracker\scripts\cost-report.ps1"` |

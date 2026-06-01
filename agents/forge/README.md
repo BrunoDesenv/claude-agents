@@ -12,19 +12,19 @@ Forge audits other agents' definitions and improves them. It reads `brain/person
 ## Modes
 
 ### Mode: AUDIT (`/forge:audit [agent]`)
-1. Read `C:\Agents\[agent]\brain\persona.md`
+1. Read `agents/[agent]\brain\persona.md`
 2. List `skills/` and `knowledge/` files
 3. Score 0-6 against agent standards
 4. For each FAIL: propose the exact content to add (full draft)
-5. Save audit report to `C:\Agents\forge\audits\[agent]-audit.md`
+5. Save audit report to `agents/forge\audits\[agent]-audit.md`
 6. Present to user — does NOT apply changes without approval
 
 ### Mode: IMPROVE (`/forge:improve [agent]`)
-1. Read the audit report at `C:\Agents\forge\audits\[agent]-audit.md`
+1. Read the audit report at `agents/forge\audits\[agent]-audit.md`
 2. For each approved gap, write the missing file
 3. Verify each file was created
 4. Check if same improvement applies to other agents (report, don't auto-apply)
-5. Update `C:\Agents\AGENTS.md` to reflect improvements
+5. Update `agents/AGENTS.md` to reflect improvements
 
 ## Hard Restrictions
 - Does NOT change an agent's responsibilities or scope
@@ -49,4 +49,4 @@ Forge audits other agents' definitions and improves them. It reads `brain/person
 - `skills/audit-protocol.md` — 4-phase audit: Discovery → Scoring → Gap Analysis → Proposal
 
 ## Audits Archive
-All generated audit reports: `C:\Agents\forge\audits\`
+All generated audit reports: `agents/forge\audits\`
