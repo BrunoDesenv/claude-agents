@@ -8,7 +8,7 @@ How to add new agents, commands, knowledge files, and improve existing agents.
 
 ### Step 1 — Create the folder structure
 ```
-C:\Agents\[agent-name]\
+agents/[agent-name]\
 ├── brain\
 │   └── persona.md      ← REQUIRED
 ├── knowledge\          ← REQUIRED (add at least 2 domain files)
@@ -61,12 +61,12 @@ color: [pick a color]
 
 Full persona, domain knowledge, and accumulated learning are loaded
 by master via the agent-hub MCP server (`get_agent_prompt("[agent-name]")`)
-pointing to `C:\Agents\[agent-name]\`.
+pointing to `agents/[agent-name]\`.
 ```
 
 ### Step 4 — Add to master's team table
 
-In `~/.claude/agents/master.md`, add to the `## Your Team` table:
+In `agents/master/_claude.md` (or `~/.claude/agents/master.md` after install), add to the `## Your Team` table:
 ```
 | `[agent-name]` | When to spawn this agent |
 ```
@@ -85,7 +85,7 @@ Score should be 5-6/6. Fix any gaps before considering the agent production-read
 
 ### Create the command file
 ```
-~/.claude/commands/[namespace]/[command].md
+agents/[namespace]/commands/[namespace]/[command].md
 ```
 
 Appears in Claude Code as `/namespace:command`.
@@ -94,7 +94,7 @@ Appears in Claude Code as `/namespace:command`.
 ```markdown
 # [Agent] [Command] — [Short Description]
 
-You are the [Agent] agent loaded from `C:\Agents\[agent]\`.
+You are the [Agent] agent loaded from `agents/[agent]\`.
 
 Call `[call_agent_command or get_agent_prompt](agent="[agent]", ...)` from the agent-hub MCP server
 to load your full persona with [domain] knowledge injected.
@@ -109,7 +109,7 @@ Task/Target: $ARGUMENTS
 ### For TOML-backed commands (architect, backend, frontend, researcher)
 The command file calls `call_agent_command` which reads the `.toml` file at:
 ```
-C:\Agents\[agent]\commands\[agent]\[command].toml
+agents/[agent]\commands\[agent]\[command].toml
 ```
 
 ### For persona-only agents (qa, validator, ux, etc.)
@@ -154,7 +154,7 @@ Use `[category]-[topic].md` — descriptive, lowercase, hyphenated:
 - `cors-localhost-all-ports.md`
 
 ### The file is auto-included
-Once the file exists in `C:\Agents\[agent]\knowledge\`, it is automatically included in every future prompt assembly via `readMarkdownDir` in the MCP server. No configuration needed.
+Once the file exists in `agents/[agent]\knowledge\`, it is automatically included in every future prompt assembly via `readMarkdownDir` in the MCP server. No configuration needed.
 
 ---
 
@@ -189,7 +189,7 @@ Mode: [MODE: WHATEVER]
 """
 ```
 
-**Note:** Do NOT reference `common/` or `brainstormer/` paths — those folders don't exist in `C:\Agents\`.
+**Note:** Do NOT reference `common/` or `brainstormer/` paths — those folders don't exist in `agents/`.
 
 ---
 
@@ -202,8 +202,8 @@ Before marking any agent as production-ready, it must score 5+/6 on this checkli
 | 1 | Role clearly defined in one sentence | Read first line of persona.md |
 | 2 | At least 3 explicit "does NOT" restrictions | Search for "does NOT" or "NEVER" |
 | 3 | Output file spec with exact paths | Search for `agent-output/` in persona.md |
-| 4 | At least 1 file in `skills/` | `ls C:\Agents\[agent]\skills\` |
-| 5 | At least 2 files in `knowledge/` | `ls C:\Agents\[agent]\knowledge\` |
+| 4 | At least 1 file in `skills/` | `ls agents/[agent]\skills\` |
+| 5 | At least 2 files in `knowledge/` | `ls agents/[agent]\knowledge\` |
 | 6 | Gate definition | Search for "halt", "gate", "approval" in persona.md |
 
 ---
@@ -213,13 +213,13 @@ Before marking any agent as production-ready, it must score 5+/6 on this checkli
 Use the forge workflow:
 ```
 /forge:audit [agent]        ← identify gaps
-# Review the audit report at C:\Agents\forge\audits\[agent]-audit.md
+# Review the audit report at agents/forge\audits\[agent]-audit.md
 # Approve the proposed fixes
 /forge:improve [agent]      ← apply approved improvements
 ```
 
 Or manually:
-1. Read `C:\Agents\[agent]\brain\persona.md`
+1. Read `agents/[agent]\brain\persona.md`
 2. Identify what's missing (use the checklist above)
 3. Add `knowledge/` files for domain rules the agent is inconsistent about
 4. Add `skills/` files for execution protocols
@@ -232,7 +232,7 @@ Or manually:
 The `system/` folder is not an agent — it's infrastructure:
 
 ```
-C:\Agents\system\
+agents/system\
 ├── agentDashboard\     ← real-time visual dashboard
 │   ├── PRD.md          ← dashboard requirements
 │   ├── api\            ← ASP.NET Core .NET 10 (port 5200)

@@ -1,4 +1,4 @@
-# C:\Agents — Multi-Agent Engineering System
+# claude-agents — Multi-Agent Engineering System
 
 A local, self-improving multi-agent AI engineering team. Each agent is a specialist with its own domain knowledge, skills, and persona. The **master** agent orchestrates the full pipeline; specialist agents do the actual work.
 
@@ -20,13 +20,13 @@ A local, self-improving multi-agent AI engineering team. Each agent is a special
 
 ### Start the Agent Command Center (dashboard)
 ```powershell
-& "C:\Agents\system\agentDashboard\start.ps1"
+& "$env:CLAUDE_AGENTS_REPO\system\agentDashboard\start.ps1"
 # Opens http://localhost:4300 — see agents appear as 2D characters in real-time
 ```
 
 ### Check system health
 ```powershell
-& "C:\Agents\system\health-check.ps1"
+& "$env:CLAUDE_AGENTS_REPO\system\health-check.ps1"
 ```
 
 ---
@@ -46,11 +46,11 @@ C:\Agents\system\         ← infrastructure (dashboard, cost tracking, health c
 ```mermaid
 graph LR
     User["User types /backend:create"] --> CC["Claude Code"]
-    CC --> CMD["~/.claude/commands/backend/create.md"]
-    CMD --> MCP["agent-hub MCP server\nindex.js\nAGENTS_ROOT=C:/Agents"]
-    MCP --> PERSONA["C:/Agents/backend/brain/persona.md"]
-    MCP --> SKILLS["C:/Agents/backend/skills/*.md"]
-    MCP --> KNOW["C:/Agents/backend/knowledge/*.md"]
+    CC --> CMD["agents/backend/commands/backend/create.md\n(installed to ~/.claude/commands/)"]
+    CMD --> MCP["agent-hub MCP server\nindex.js\nAGENTS_ROOT=claude-agents/agents/"]
+    MCP --> PERSONA["agents/backend/brain/persona.md"]
+    MCP --> SKILLS["agents/backend/skills/*.md"]
+    MCP --> KNOW["agents/backend/knowledge/*.md"]
     PERSONA & SKILLS & KNOW --> PROMPT["Assembled prompt\n(2000-6000 tokens)"]
     PROMPT --> Claude["Claude executes\nas Backend Engineer"]
 ```

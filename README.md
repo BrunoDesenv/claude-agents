@@ -22,9 +22,9 @@ Then **restart Claude Code**. That's it.
 CLAUDE_AGENTS_REPO = C:\path\to\claude-agents   (User env var)
 AGENTS_ROOT        = C:\path\to\claude-agents\agents
 
-~/.claude/agents/   ← agent wrappers (master + 9 specialists)
-~/.claude/commands/ ← slash commands for all agents
-~/.claude/settings.json updated with agent-hub MCP
+~/.claude/agents/[agent].md   ← copied from agents/[agent]/_claude.md
+~/.claude/commands/[ns]/*.md  ← copied from agents/[agent]/commands/[ns]/*.md
+~/.claude/settings.json       ← updated with agent-hub MCP entry
 ```
 
 ---
@@ -119,11 +119,17 @@ Removes only files installed by this repo. Never touches your other Claude Code 
 
 ```
 claude-agents/
-├── agents/          ← agent definitions (personas, skills, knowledge, commands)
-├── claude/          ← installed into ~/.claude/ by install.ps1
-│   ├── agents/      ← master.md (orchestrator) + thin wrappers
-│   └── commands/    ← slash commands (/architect:create, /backend:auditor, ...)
-├── mcp/agent-hub/   ← MCP server that assembles agent prompts
+├── agents/               ← one folder per agent, everything inside
+│   ├── backend/
+│   │   ├── _claude.md        ← Claude Code wrapper (installed to ~/.claude/agents/)
+│   │   ├── brain/persona.md  ← who the agent is
+│   │   ├── knowledge/        ← domain rules (grows via retrospective)
+│   │   ├── skills/           ← execution protocols
+│   │   └── commands/backend/
+│   │       ├── create.toml   ← MCP command (stays in repo)
+│   │       └── create.md     ← slash command (installed to ~/.claude/commands/)
+│   └── [architect, frontend, qa, validator, ux, researcher, documentation, master, forge]/
+├── mcp/agent-hub/        ← MCP server that assembles agent prompts
 ├── system/
 │   ├── agentDashboard/   ← real-time visual dashboard (Angular + C#)
 │   ├── cost-tracker/     ← SQLite session cost tracking
