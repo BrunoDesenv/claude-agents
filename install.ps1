@@ -37,27 +37,39 @@ $targetAgents = "$claudeHome\agents"
 New-Item -ItemType Directory -Force $targetAgents | Out-Null
 $installedFiles = [System.Collections.Generic.List[string]]::new()
 
-Get-ChildItem "$RepoRoot\claude\agents\*.md" | ForEach-Object {
-    $dest = Join-Path $targetAgents $_.Name
-    Copy-Item $_.FullName $dest -Force
-    $installedFiles.Add($dest)
-    Write-Host "   + $($_.Name)" -ForegroundColor DarkGray
+Get-ChildItem "$RepoRoot\agents" -Directory | ForEach-Object {
+    $wrapper = Join-Path $_.FullName "_claude.md"
+    if (Test-Path $wrapper) {
+        $dest = Join-Path $targetAgents "$($_.Name).md"
+        Copy-Item $wrapper $dest -Force
+        $installedFiles.Add($dest)
+        Write-Host "   + $($_.Name).md" -ForegroundColor DarkGray
+    }
 }
 
-# ── 4. Copy slash commands → ~/.claude/commands/ ──────────────────────────
+# ── 4. Copy slash commands (.md only) → ~/.claude/commands/ ───────────────
 Write-Host "4. Installing commands to ~/.claude/commands/..." -ForegroundColor Yellow
 $targetCommands = "$claudeHome\commands"
 New-Item -ItemType Directory -Force $targetCommands | Out-Null
 
-Get-ChildItem "$RepoRoot\claude\commands" -Directory | ForEach-Object {
-    $nsDir = Join-Path $targetCommands $_.Name
-    New-Item -ItemType Directory -Force $nsDir | Out-Null
-    Get-ChildItem "$($_.FullName)\*.md" | ForEach-Object {
-        $dest = Join-Path $nsDir $_.Name
-        Copy-Item $_.FullName $dest -Force
-        $installedFiles.Add($dest)
+Get-ChildItem "$RepoRoot\agents" -Directory | ForEach-Object {
+    $cmdRoot = Join-Path $_.FullName "commands"
+    if (Test-Path $cmdRoot) {
+        Get-ChildItem $cmdRoot -Directory | ForEach-Object {
+            $ns = $_.Name
+            $nsTarget = Join-Path $targetCommands $ns
+            New-Item -ItemType Directory -Force $nsTarget | Out-Null
+            $mdFiles = Get-ChildItem "$($_.FullName)\*.md"
+            $mdFiles | ForEach-Object {
+                $dest = Join-Path $nsTarget $_.Name
+                Copy-Item $_.FullName $dest -Force
+                $installedFiles.Add($dest)
+            }
+            if ($mdFiles.Count -gt 0) {
+                Write-Host "   + $ns/ ($($mdFiles.Count) commands)" -ForegroundColor DarkGray
+            }
+        }
     }
-    Write-Host "   + $($_.Name)/ ($((Get-ChildItem $_.FullName -Filter '*.md').Count) commands)" -ForegroundColor DarkGray
 }
 
 # ── 5. Update ~/.claude/settings.json ─────────────────────────────────────
