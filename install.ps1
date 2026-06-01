@@ -1,21 +1,16 @@
 #!/usr/bin/env pwsh
-# install.ps1 — Sets up claude-agents on a new machine
-# Usage: .\install.ps1
-# No admin rights required.
-
 param([string]$RepoRoot = $PSScriptRoot)
-
 $ErrorActionPreference = "Stop"
 $claudeHome = "$env:USERPROFILE\.claude"
 
 Write-Host ""
 Write-Host "=====================================================" -ForegroundColor Cyan
-Write-Host "  Claude Agents — Install" -ForegroundColor Cyan
+Write-Host "  Claude Agents -- Install" -ForegroundColor Cyan
 Write-Host "  Repo: $RepoRoot" -ForegroundColor DarkGray
 Write-Host "=====================================================" -ForegroundColor Cyan
 Write-Host ""
 
-# ── 1. Set environment variables (User level — no admin required) ──────────
+# 1. Set environment variables (User level -- no admin required)
 Write-Host "1. Setting environment variables..." -ForegroundColor Yellow
 [Environment]::SetEnvironmentVariable("CLAUDE_AGENTS_REPO", $RepoRoot, "User")
 [Environment]::SetEnvironmentVariable("AGENTS_ROOT", "$RepoRoot\agents", "User")
@@ -24,14 +19,14 @@ $env:AGENTS_ROOT = "$RepoRoot\agents"
 Write-Host "   CLAUDE_AGENTS_REPO = $RepoRoot" -ForegroundColor DarkGray
 Write-Host "   AGENTS_ROOT        = $RepoRoot\agents" -ForegroundColor DarkGray
 
-# ── 2. Install MCP server dependencies ────────────────────────────────────
+# 2. Install MCP server dependencies
 Write-Host "2. Installing MCP server dependencies..." -ForegroundColor Yellow
 Push-Location "$RepoRoot\mcp\agent-hub"
 npm install --silent
 Pop-Location
 Write-Host "   Done." -ForegroundColor DarkGray
 
-# ── 3. Copy thin wrappers → ~/.claude/agents/ ─────────────────────────────
+# 3. Copy thin wrappers to ~/.claude/agents/
 Write-Host "3. Installing agent wrappers to ~/.claude/agents/..." -ForegroundColor Yellow
 $targetAgents = "$claudeHome\agents"
 New-Item -ItemType Directory -Force $targetAgents | Out-Null
@@ -47,7 +42,7 @@ Get-ChildItem "$RepoRoot\agents" -Directory | ForEach-Object {
     }
 }
 
-# ── 4. Copy slash commands (.md only) → ~/.claude/commands/ ───────────────
+# 4. Copy slash commands (.md only) to ~/.claude/commands/
 Write-Host "4. Installing commands to ~/.claude/commands/..." -ForegroundColor Yellow
 $targetCommands = "$claudeHome\commands"
 New-Item -ItemType Directory -Force $targetCommands | Out-Null
@@ -72,7 +67,7 @@ Get-ChildItem "$RepoRoot\agents" -Directory | ForEach-Object {
     }
 }
 
-# ── 5. Update ~/.claude/settings.json ─────────────────────────────────────
+# 5. Update ~/.claude/settings.json with agent-hub MCP
 Write-Host "5. Updating ~/.claude/settings.json with agent-hub MCP..." -ForegroundColor Yellow
 $settingsPath = "$claudeHome\settings.json"
 
@@ -98,7 +93,7 @@ $settings.mcpServers | Add-Member -MemberType NoteProperty -Name "agent-hub" -Va
 $settings | ConvertTo-Json -Depth 10 | Set-Content $settingsPath -Encoding utf8
 Write-Host "   Done." -ForegroundColor DarkGray
 
-# ── 6. Write install manifest ──────────────────────────────────────────────
+# 6. Write install manifest
 Write-Host "6. Writing install manifest..." -ForegroundColor Yellow
 $manifest = [PSCustomObject]@{
     version        = "1.0"
@@ -109,7 +104,7 @@ $manifest = [PSCustomObject]@{
 $manifest | ConvertTo-Json -Depth 5 | Set-Content "$claudeHome\claude-agents-install.json" -Encoding utf8
 Write-Host "   Manifest: $claudeHome\claude-agents-install.json" -ForegroundColor DarkGray
 
-# ── 7. Health check ────────────────────────────────────────────────────────
+# 7. Health check
 Write-Host "7. Running health check..." -ForegroundColor Yellow
 Write-Host ""
 & "$RepoRoot\system\health-check.ps1"
@@ -118,7 +113,7 @@ Write-Host ""
 Write-Host "=====================================================" -ForegroundColor Green
 Write-Host "  Install complete!" -ForegroundColor Green
 Write-Host ""
-Write-Host "  Restart Claude Code to load the new MCP server." -ForegroundColor Yellow
-Write-Host "  Then try: /backend:create Hello World" -ForegroundColor Yellow
+Write-Host "  IMPORTANT: Restart Claude Code to load the new MCP." -ForegroundColor Yellow
+Write-Host "  AGENTS_ROOT is now: $RepoRoot\agents" -ForegroundColor Yellow
 Write-Host "=====================================================" -ForegroundColor Green
 Write-Host ""
