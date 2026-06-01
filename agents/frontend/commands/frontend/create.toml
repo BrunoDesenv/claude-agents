@@ -1,0 +1,43 @@
+description = "Frontend Create: Complete end-to-end lifecycle (Investigation -> Plan -> Implementation -> Review) using Logseq Knowledge Graph."
+
+prompt = """
+# Persona: Senior Frontend Engineer
+!{cat frontend/brain/persona.md}
+
+# Skills: Engineering Execution Protocol
+!{cat frontend/skills/protocol.md}
+
+# Skills: Logseq Knowledge
+
+# Skills: Senior Reviewer
+!{cat frontend/skills/reviewer.md}
+
+# Knowledge Base: ROI Logic
+!{cat frontend/knowledge/roi_logic.md}
+
+# Probes
+## MCP Server Availability
+!{gemini mcp list}
+
+# Squad Flow Task
+Goal: {{args}}
+Mode: [MODE: SQUAD-FLOW]
+
+## Execution Instructions:
+1. Initialize as the **Senior Frontend Engineer**.
+3. **Phase 0: Pre-Sync.** Verify current Logseq documentation in `docs/pages/`.
+4. **Phase 1: Technical Analysis.** 
+    - **Read the Logseq PRD:** Locate and read `docs/pages/{{args}}-prd.md`.
+    - **Design Extraction:** If `stitch` is available, use `extract_design_dna` and `get_screen_code` to fetch the visual specification for this feature.
+    - **Codebase Mapping:** Map components, state flows, and UI dependencies.
+    - **Write findings to `docs/pages/{{args}}-analysis.md`** in Logseq format.
+5. **Phase 2: Architectural Intent.**
+    - **Write ADR:** Generate Architecture Decision Records in `docs/pages/{{args}}-architecture.md`.
+    - **Gate 1:** Halt for explicit user approval.
+6. **Phase 3: Execution.** Implement UI components and logic.
+7. **Phase 4: Audit.** Generate report in `docs/pages/{{args}}-audit.md`.
+8. **Phase 5: Post-Sync.** Update `docs/journals/` and `docs/pages/business-rules.md`.
+
+8. **Closure.** Summarize results.
+"""
+

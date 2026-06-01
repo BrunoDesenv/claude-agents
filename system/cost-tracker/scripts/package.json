@@ -1,0 +1,5 @@
+{
+  "name": "agent-cost-tracker",
+  "version": "1.0.0",
+  "description": "Local SQLite cost tracking for AI agent sessions (uses built-in node:sqlite, no npm deps required)"
+}

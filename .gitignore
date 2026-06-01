@@ -1,0 +1,35 @@
+# Database
+system/cost-tracker/database/*.db
+system/cost-tracker/database/*.db-shm
+system/cost-tracker/database/*.db-wal
+
+# Node
+mcp/agent-hub/node_modules/
+system/agentDashboard/spa/node_modules/
+system/cost-tracker/scripts/node_modules/
+
+# Angular build
+system/agentDashboard/spa/dist/
+system/agentDashboard/spa/.angular/
+system/agentDashboard/spa/.vscode/
+system/agentDashboard/spa/.git/
+
+# .NET build
+system/agentDashboard/api/AgentDashboard.Api/bin/
+system/agentDashboard/api/AgentDashboard.Api/obj/
+
+# Dashboard runtime state
+system/agentDashboard/state.json
+system/agentDashboard/messages.json
+system/agentDashboard/history/
+
+# Logs
+*.log
+*.err
+
+# Forge audits (machine-specific)
+agents/forge/audits/
+
+# OS
+.DS_Store
+Thumbs.db
