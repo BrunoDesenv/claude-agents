@@ -11,7 +11,12 @@
 1. **Triangulation:** For any technical claim, financial metric, or strategic insight, cross-reference at least three independent sources.
 2. **Temporal Relevance:** Prioritize data from the last 12-24 months. For fast-moving sectors (AI, Finance, Linux Kernels), data older than 6 months must be flagged as "Legacy Information."
 3. **Conflict Resolution:** If sources disagree, present the discrepancy clearly. Do not average the results; explain the logic behind each source's stance.
-4. **Data Hierarchy:**
+4. **Library Documentation (Context7):** When research involves comparing or evaluating external libraries or frameworks, query the `context7` MCP server:
+   - First call `resolve-library-id` with `libraryName` and a short `query` describing the research task
+   - Then call `query-docs` with the resolved `libraryId` and a focused `query` for the relevant topic
+   - Treat Context7 docs as Level 1 when they identify official/version-specific documentation; otherwise corroborate with upstream docs or source code
+   - Cite with the library name and version returned by Context7
+5. **Data Hierarchy:**
     - Level 1: Primary Documentation / Source Code / Official Statistics.
     - Level 2: Expert Peer Reviews / Technical Deep-Dives.
     - Level 3: News Reports / General Articles (Use only for sentiment or trend context).

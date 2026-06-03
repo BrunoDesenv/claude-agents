@@ -14,6 +14,14 @@ The frontend choice must prioritize **Performance**, **DX (Developer Experience)
 | **E2E Testing** | **Cypress / Playwright** | Real browser interaction, stable tests. | Slow execution; requires separate environment. |
 | **API Client** | **Axios / TanStack Query** | Type-safe, data fetching with caching. | Increases bundle size compared to native `fetch`. |
 
+| Category | Technology | Best Use Case | Frontend Trade-off |
+| :--- | :--- | :--- | :--- |
+| **Micro-Frontends** | **@angular-architects/native-federation** | Angular micro-frontend host + remote setup | Angular 17+ (match NF major to Angular major) |
+
+> For v4/orchestrator setups, verify whether current official docs require `@angular-architects/native-federation-v4`.
+
+> Do **not** install `@angular-architects/native-federation-runtime` — it is a stale standalone package; the main package already includes and re-exports the runtime.
+
 ## Selection Principles
 1. **Prefer Modern Build Tools:** Vite/Turbo over Webpack.
 2. **Type-Safe Development:** Strict TypeScript is mandatory for all components.

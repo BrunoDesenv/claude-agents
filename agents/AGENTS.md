@@ -73,13 +73,13 @@ Every session. Entry point via `claude --agent master` or by setting `"agent": "
 - `task.md` — verbatim task written at Phase 1
 - `requirements.md` — discipline breakdown (backend/frontend/ux/research yes/no)
 - `session-summary.md` — final session summary with cost estimate
-- Cost entry written to `agents/system\database\agent-costs.db`
+- Cost entry written to `C:\claude-agents\system\cost-tracker\database\agent-costs.db`
 
 **Files it may write:**
 - `[session-dir]/task.md`
 - `[session-dir]/requirements.md`
 - `[session-dir]/session-summary.md`
-- `agents/system\database\agent-costs.db` (via log-session.js)
+- `C:\claude-agents\system\cost-tracker\database\agent-costs.db` (via log-session.js)
 - `agents/[agent]/knowledge/[lesson].md` (via retrospective sub-agent)
 
 **Approval gates:**
@@ -92,7 +92,10 @@ Every session. Entry point via `claude --agent master` or by setting `"agent": "
 
 **Estimated cost:** Não definido (overhead agent — no direct LLM tokens for its own reasoning, all tokens are in sub-agents)
 
-**Available commands:** None (master does not use TOML commands)
+**Available commands:**
+- `master:run` — Full pipeline (intake → architect → planning → implementation → validator×2 → qa → documentation → summary)
+- `master:quick` — Lightweight pipeline for simple single-discipline tasks (intake → architect → 1 implementation agent → summary). Skips validators, qa, and documentation. Estimated cost: ~$0.50–$0.80.
+- `master:retrospective` — Learn from a production bug (writes new knowledge rule to the responsible agent's knowledge/ folder)
 
 **Relevant skills:** None defined in `agents/master\skills\`
 
@@ -107,7 +110,7 @@ Every session. Entry point via `claude --agent master` or by setting `"agent": "
 
 **Sources:**
 - `agents/master\brain\persona.md`
-- `C:\Users\bru_b\.claude\agents\master.md` (full orchestration pipeline definition)
+- `C:\claude-agents\agents\master\_claude.md` (full orchestration pipeline definition — installed to `~/.claude/agents/master.md`)
 
 ---
 
@@ -572,9 +575,9 @@ The `system/` folder is not an agent. It is the cost tracking and reporting infr
 
 **Purpose:** Persist every master session and agent run to a local SQLite database. Enables cost monitoring, usage analytics, and historical session lookup without any external service.
 
-**Location:** `agents/system\`
+**Location:** `C:\claude-agents\system\cost-tracker\`
 
-**Database:** `agents/system\database\agent-costs.db`
+**Database:** `C:\claude-agents\system\cost-tracker\database\agent-costs.db`
 
 SQLite schema:
 ```sql
@@ -607,18 +610,18 @@ CREATE TABLE agent_runs (
 );
 ```
 
-**Scripts:**
-- `scripts/log-session.js` — CLI with 3 commands:
+**Scripts** (all under `$env:CLAUDE_AGENTS_REPO\system\cost-tracker\scripts\`)**:**
+- `log-session.js` — CLI with 3 commands:
   - `session-start --id <uuid> --task-file <path> --started <iso> --session-dir <path>` — creates session (status=partial)
   - `session-end --id <uuid> --finished <iso> --total-cost <n> --total-tokens <n> --status completed` — closes session
   - `agent --session-id <uuid> --agent <name> --model <id> --phase <text> --tokens-in <n> --tokens-out <n> --cost <n> --status pass` — records agent run (INSERT OR REPLACE)
   - `query --last <n> [--agent <name>] [--format table|json|csv]` — query historical data
-- `scripts/cost-query.js` — internal SQL query helper used by cost-report.ps1
-- `scripts/cost-report.ps1` — PowerShell summary: total cost all-time, 30-day cost, most-used agent, top 5 sessions by cost, average cost per task
+- `cost-query.js` — internal SQL query helper used by cost-report.ps1
+- `cost-report.ps1` — PowerShell summary: total cost all-time, 30-day cost, most-used agent, top 5 sessions by cost, average cost per task
 
 **How to run the cost report:**
 ```powershell
-agents/system\scripts\cost-report.ps1
+& "$env:CLAUDE_AGENTS_REPO\system\cost-tracker\scripts\cost-report.ps1"
 ```
 
 **Model rates used for calculations:**

@@ -36,7 +36,7 @@ A local, self-improving multi-agent AI engineering team. Each agent is a special
 ```
 ~/.claude/agents/         ← thin Claude Code wrappers (frontmatter + identity)
 agents/                ← rich agent home (persona + skills + knowledge)
-agents/system\         ← infrastructure (dashboard, cost tracking, health check)
+C:\claude-agents\system\  ← infrastructure (dashboard, cost tracking, health check)
 ~/.claude/commands/       ← slash commands (/architect:create, /backend:auditor, ...)
 ~/.claude/mcp/agent-hub/  ← MCP server that assembles prompts from agents/
 ```
@@ -128,6 +128,7 @@ See [COMMANDS.md](COMMANDS.md) for the complete reference.
 
 ```
 /master:run              Full pipeline on any task
+/master:quick            Lightweight pipeline for simple single-discipline tasks
 /master:retrospective    Teach agents from a production bug
 
 /architect:create        Full lifecycle — architecture to review
@@ -230,9 +231,9 @@ agents/
 │
 ├── researcher\             ← researcher agent
 ├── documentation\          ← documentation agent
-├── master\                 ← master agent
-│
-└── system\                 ← infrastructure (not an agent)
+└── master\                 ← master agent
+
+C:\claude-agents\system\    ← infrastructure (not an agent, sibling of agents\)
     ├── agentDashboard\     ← real-time visual dashboard (Angular + C#)
     ├── cost-tracker\       ← SQLite cost tracking
     │   ├── database\

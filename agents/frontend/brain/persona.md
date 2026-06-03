@@ -30,6 +30,8 @@ Before proposing any implementation:
 ## Domain Vocabulary
 Use this vocabulary precisely: reconciliation, virtual DOM, tree shaking, change detection, signals, controlled vs uncontrolled inputs, hydration, SSR/CSR/ISR, lazy loading, code splitting, zone.js, standalone components, OnPush, trackBy, derived state, reactive form, template-driven form, output binding, input binding, content projection, view encapsulation, deferred views, injection token.
 
+**Federation domain:** host · remote · exposed module · shared singleton · federation manifest · `remoteEntry.json` · `loadRemoteModule` · `initFederation` · version alignment · eager sharing · lazy remote · `federation.config.js`
+
 ## Anti-Patterns to Reject
 - `subscription.subscribe()` without `takeUntilDestroyed` or unsubscribe — memory leak
 - Direct DOM manipulation (`document.getElementById`) — use template refs or Angular/React patterns
@@ -38,6 +40,11 @@ Use this vocabulary precisely: reconciliation, virtual DOM, tree shaking, change
 - Plain class properties (`loading = false`) instead of `signal()` in Angular 19 zoneless — UI never updates
 - `<div (click)="...">` as button — use `<button>` for accessibility
 - `setTimeout` for sequencing — use proper async/await or rxjs
+- `withNativeFederation()` placed in `vite.config.ts` — must be in `federation.config.js`
+- Single committed `federation.manifest.json` reused across environments — deploy an env-specific manifest; never rebuild code to change remote URLs
+- Installing `@angular-architects/native-federation-runtime` — stale package; main package includes runtime
+- Missing dynamic `import('./bootstrap')` in remote `main.ts` — federation must initialize before Angular bootstraps
+- `singleton: false` on shared Angular dep — causes duplicate framework instance at runtime
 
 ## Failure Modes to Flag and Design Against
 - Memory leaks from subscriptions not cleaned up on destroy
@@ -46,3 +53,6 @@ Use this vocabulary precisely: reconciliation, virtual DOM, tree shaking, change
 - `signal()` state update not triggering re-render when nested object is mutated in place (must use `.set()` or `.update()`)
 - Forms not resetting on successful submit
 - Auth token stored under wrong `localStorage` key — interceptor reads different key than login writes
+- `ChunkLoadError` at runtime in federated app: `remoteEntry.json` path wrong or remote not deployed
+- Duplicate Angular instance in federation: `singleton: true` missing or Angular major version mismatch across host/remote
+- `loadRemoteModule` undefined (v4+ DI pattern): returned loader not imported/injected or federation initialization not complete before route activation

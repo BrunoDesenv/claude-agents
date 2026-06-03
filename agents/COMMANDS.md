@@ -30,6 +30,28 @@ Runs the **full multi-agent pipeline** from intake to documentation.
 
 ---
 
+### `/master:quick [task description]`
+Runs the **lightweight pipeline** for simple, single-discipline tasks.
+
+**When to use:** Small, scoped changes — "fix X", "add field Y", "update Z" — where only backend OR frontend is involved and no new API contracts, DB migrations, or auth changes are needed.
+
+**What it does:**
+1. Writes `task.md` + `requirements.md`
+2. Spawns architect → aborts to `/master:run` if `BLOCKED_MAJOR_ARCHITECTURE_DECISION` is found
+3. Spawns 1 implementation agent (backend OR frontend) for planning + implementation
+4. Session summary + cost logged to DB
+
+**Skipped:** researcher, ux, validator×2, qa, documentation
+
+**Estimated cost:** ~$0.50–$0.80 (vs ~$1.50+ for full pipeline)
+
+**Example:**
+```
+/master:quick Add a `cancelledAt` timestamp field to the booking response DTO
+```
+
+---
+
 ### `/master:retrospective [bug description]`
 Teaches the agent system from a **production bug** that slipped past QA.
 

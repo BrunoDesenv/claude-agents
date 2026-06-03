@@ -232,7 +232,7 @@ Or manually:
 The `system/` folder is not an agent — it's infrastructure:
 
 ```
-agents/system\
+C:\claude-agents\system\
 ├── agentDashboard\     ← real-time visual dashboard
 │   ├── PRD.md          ← dashboard requirements
 │   ├── api\            ← ASP.NET Core .NET 10 (port 5200)

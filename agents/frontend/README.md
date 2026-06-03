@@ -17,11 +17,12 @@ The Frontend Agent is designed for building accessible, high-performance user in
 - **Knowledge Base (`knowledge/`):**
     - `git_standard.md`: Standards for UI-focused commits and branching.
     - `docs_standard.md`: UI documentation and component comment requirements.
-    - `patterns.md`: Component architecture and state management patterns (Atomic, Redux, Pinia, etc.).
+    - `patterns.md`: Component architecture and state management patterns (Atomic, Redux, Pinia, micro-frontends, etc.).
     - `roi_logic.md`: Decision-making framework for UI features, Lighthouse scores, and conversion.
-    - `dependencies.md`: Frontend ecosystem (Vite, Frameworks, Testing, CSS).
+    - `dependencies.md`: Frontend ecosystem (Vite, Frameworks, Testing, CSS, Native Federation).
     - `security_standards.md`: Frontend-specific security vulnerabilities (XSS, CSP, Auth storage).
     - `bottlenecks.md`: Web Vitals, Bundle Size, and Rendering performance checklist.
+    - `microfrontends-native-federation.md`: Micro-frontend architecture with `@angular-architects/native-federation` — host/remote setup, manifest, shared deps, anti-patterns, failure modes.
 - **Commands:**
     - `/frontend:create`: Execute a complete, end-to-end frontend lifecycle (Investigation -> Plan -> Implementation -> Review).
     - `/frontend:auditor`: Audit UI code for patterns, security, accessibility, and performance.

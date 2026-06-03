@@ -213,7 +213,7 @@ graph TD
     FIX --> QA2["QA re-tests"]
     QA2 --> PASS{PASS?}
     PASS -->|yes| RETRO["Retrospective agent spawns"]
-    RETRO --> WRITE["Writes new rule to\nC:/Agents/[agent]/knowledge/[rule].md"]
+    RETRO --> WRITE["Writes new rule to\nC:/claude-agents/agents/[agent]/knowledge/[rule].md"]
     WRITE --> NEXT["Next session: rule auto-included\n(MCP reads all knowledge/ files)"]
     PASS -->|no, cycle < 2| FIX
     PASS -->|no, cycle = 2| USER["Report to user — manual intervention needed"]
